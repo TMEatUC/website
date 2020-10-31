@@ -32,14 +32,7 @@ const Background = () => (
   </div>
 );
 
-const ProfilePicture = styled(Image)`
-  border-radius: 50%;
-  transition: all 0.25s ease-out;
-
-  &:hover {
-    border-radius: 20%;
-  }
-`;
+const ProfilePicture = styled(Image)``;
 
 const About = () => (
   <Section.Container id="about" Background={Background}>

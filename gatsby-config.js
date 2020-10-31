@@ -52,4 +52,5 @@ module.exports = {
     isMediumUserDefined: !!about.mediumUser,
     deterministicBehaviour: !!DETERMINISTIC,
   },
+  pathPrefix: `/site`
 };
