@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { SectionLinks } from 'react-scroll-section';
 import RouteLink from './RouteLink';
 import Logo from './Logo/Portfolio.svg';
+import { graphql, StaticQuery } from 'gatsby';
 
 const capitalize = (s) => s && s[0].toUpperCase() + s.slice(1);
 
@@ -46,38 +47,57 @@ const Header = () => (
       alignItems="center"
       p={3}
     >
-      <SectionLinks>
-        {({ allLinks }) => {
-          const { home, links } = formatLinks(allLinks);
-
-          const homeLink = home && (
-            <Image
-              src={Logo}
-              width="50px"
-              alt="Portfolio Logo"
-              onClick={home.onClick}
-              style={{
-                cursor: 'pointer',
-              }}
-            />
-          );
-          const navLinks = links.map(({ name, value }) => (
-            <RouteLink
-              key={name}
-              onClick={value.onClick}
-              selected={value.isSelected}
-              name={name}
-            />
-          ));
-
+      <StaticQuery
+        query={graphql`
+          query ProfileQuery {
+            contentfulAbout {
+              profile {
+                title
+                image: resize(width: 450, quality: 100) {
+                  src
+                }
+              }
+            }
+          }
+        `}
+        render={(data) => {
+          const {profile} = data.contentfulAbout;
           return (
-            <Fragment>
-              {homeLink}
-              <Flex mr={[0, 3, 5]}>{navLinks}</Flex>
-            </Fragment>
-          );
+            <SectionLinks>
+              {({ allLinks }) => {
+                const { home, links } = formatLinks(allLinks);
+
+                const homeLink = home && (
+                  <Image
+                    src={profile.image.src}
+                    width="50px"
+                    alt="Portfolio Logo"
+                    onClick={home.onClick}
+                    style={{
+                      cursor: 'pointer',
+                    }}
+                  />
+                );
+                const navLinks = links.map(({ name, value }) => (
+                  <RouteLink
+                    key={name}
+                    onClick={value.onClick}
+                    selected={value.isSelected}
+                    name={name}
+                  />
+                ));
+
+                return (
+                  <Fragment>
+                    {homeLink}
+                    <Flex mr={[0, 3, 5]}>{navLinks}</Flex>
+                  </Fragment>
+                );
+              }}
+            </SectionLinks>
+          )
         }}
-      </SectionLinks>
+      />
     </Flex>
   </HeaderContainer>
 );
