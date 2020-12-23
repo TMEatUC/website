@@ -7,7 +7,7 @@ import RouteLink from './RouteLink';
 import Logo from './Logo/Portfolio.svg';
 import { graphql, StaticQuery } from 'gatsby';
 
-const capitalize = (s) => s && s[0].toUpperCase() + s.slice(1);
+const capitalize = (s) => s && s.split("-").map((w) => w[0].toUpperCase() + w.substring(1)).join(" ");
 
 const HeaderContainer = styled(Headroom)`
   * {

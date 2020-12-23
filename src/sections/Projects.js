@@ -106,7 +106,6 @@ const ProjectTag = styled.div`
 const Project = ({
   name,
   description,
-  projectUrl,
   repositoryUrl,
   type,
   publishedDate,
@@ -135,25 +134,25 @@ const Project = ({
           >
             <Box mx={1} fontSize={5}>
               <SocialLink
-                name="Check repository"
-                fontAwesomeIcon="github"
+                name="View LinkedIn"
+                fontAwesomeIcon="linkedin"
                 url={repositoryUrl}
               />
             </Box>
-            <Box mx={1} fontSize={5}>
+            {/* <Box mx={1} fontSize={5}>
               <SocialLink
                 name="See project"
                 fontAwesomeIcon="globe"
                 url={projectUrl}
               />
-            </Box>
+            </Box> */}
           </Flex>
           <ImageSubtitle bg="primary" color="white" y="bottom" x="right" round>
             {type}
           </ImageSubtitle>
-          <Hide query={MEDIA_QUERY_SMALL}>
+          {/* <Hide query={MEDIA_QUERY_SMALL}>
             <ImageSubtitle bg="backgroundDark">{publishedDate}</ImageSubtitle>
-          </Hide>
+          </Hide> */}
         </ProjectTag>
       </ImageContainer>
     </Flex>
@@ -176,8 +175,8 @@ Project.propTypes = {
 };
 
 const Projects = () => (
-  <Section.Container id="projects" Background={Background}>
-    <Section.Header name="Projects" icon="💻" label="notebook" />
+  <Section.Container id="executive-board" Background={Background}>
+    <Section.Header name="Executive Board" icon="" label="notebook" />
     <StaticQuery
       query={graphql`
         query ProjectsQuery {
