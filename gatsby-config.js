@@ -47,6 +47,7 @@ if (ANALYTICS_ID) {
 }
 
 module.exports = {
+  pathPrefix: "/website",
   plugins,
   siteMetadata: {
     isMediumUserDefined: !!about.mediumUser,
